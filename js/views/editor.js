@@ -1,7 +1,8 @@
 import { createProject, updateProject, initScores, seedBadgesIfEmpty,
          subscribeProject, subscribeActivities, saveActivity, deleteActivity,
          saveBadge, deleteBadgeDoc, resetScores,
-         STARTER_ACTIVITIES, STARTER_BADGES }  from '../firebase.js';
+         STARTER_ACTIVITIES, STARTER_BADGES,
+         db, getDocs, collection }             from '../firebase.js';
 import { getCurrentUser }                            from '../auth.js';
 import { navigate, registerUnmount }                 from '../router.js';
 import { applyTheme, resetTheme, generateId,
@@ -65,10 +66,15 @@ function handleBack() {
 }
 
 async function handleSaveOrNext() {
-  const error = validateStep(currentStep);
-  if (error) { showToast(error, 'error'); return; }
-  if (currentStep < TOTAL_STEPS) { goToStep(currentStep + 1); return; }
-  await saveProject();
+  try {
+    const error = validateStep(currentStep);
+    if (error) { showToast(error, 'error'); return; }
+    if (currentStep < TOTAL_STEPS) { goToStep(currentStep + 1); return; }
+    await saveProject();
+  } catch (err) {
+    console.error('handleSaveOrNext error:', err);
+    showToast('Errore: ' + err.message, 'error');
+  }
 }
 
 // ── Validazione ───────────────────────────────────────────
@@ -696,12 +702,12 @@ async function loadExistingProject(projectId) {
         actUnsub();
         draftActivities = activities;
         // Carica anche i badge
-        import('../firebase.js').then(({ getDocs, collection, db }) => {
-          getDocs(collection(db, 'projects', projectId, 'badges')).then(snap => {
+        getDocs(collection(db, 'projects', projectId, 'badges'))
+          .then(snap => {
             draftBadges = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-            resolve(project);
-          }).catch(() => { draftBadges = []; resolve(project); });
-        });
+            resolve(normalizeDraft(project));
+          })
+          .catch(() => { draftBadges = []; resolve(normalizeDraft(project)); });
       });
     });
   });
@@ -721,5 +727,20 @@ function createEmptyDraft() {
     settings: { allowSelfLog: true, showLogHistory: true },
     currentObjective: null,
     activeEvent: null,
+  };
+}
+
+function normalizeDraft(project) {
+  // Garantisce che tutti i campi attesi esistano, anche per progetti vecchi
+  return {
+    ...project,
+    name:            project.name            ?? '',
+    description:     project.description     ?? '',
+    theme:           project.theme           ?? { emoji: '🎯', primaryColor: '#6C63FF', accentColor: '#FF6584', fontStyle: 'rounded' },
+    participantMode: project.participantMode  ?? 'teams',
+    participants:    Array.isArray(project.participants) ? project.participants : [],
+    settings:        project.settings        ?? { allowSelfLog: true, showLogHistory: true },
+    currentObjective:project.currentObjective ?? null,
+    activeEvent:     project.activeEvent     ?? null,
   };
 }
