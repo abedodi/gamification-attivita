@@ -1,0 +1,14 @@
+{
+  "name": "Gamification Attività",
+  "short_name": "GameAct",
+  "description": "Giochi a punti personalizzati per squadre e individui",
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#F7F8FC",
+  "theme_color": "#6C63FF",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

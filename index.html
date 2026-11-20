@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gamification Attività</title>
+  <meta name="description" content="Giochi a punti personalizzati per squadre e individui">
+  <meta name="theme-color" content="#6C63FF">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="GameAct">
+  <link rel="manifest" href="assets/manifest.json">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/editor.css">
+  <link rel="stylesheet" href="css/play.css">
+  <link rel="stylesheet" href="css/log.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <!-- ===== VIEW: LOGIN ===== -->
+  <section id="view-login" class="view hidden">
+    <div class="login-container">
+      <div class="login-card">
+        <div class="login-logo">🎯</div>
+        <h1>Gamification Attività</h1>
+        <p class="login-subtitle">Crea e gestisci i tuoi giochi a punti</p>
+        <button id="btn-google-login" class="btn btn-primary btn-google">
+          Accedi con Google
+        </button>
+        <p class="login-error"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== VIEW: DASHBOARD ===== -->
+  <section id="view-dashboard" class="view hidden">
+    <header class="app-header">
+      <span class="header-logo">🎯</span>
+      <h1 class="header-title">I miei progetti</h1>
+      <div class="header-actions">
+        <span id="user-name" class="user-name"></span>
+        <button id="btn-logout" class="btn btn-ghost btn-sm">Esci</button>
+      </div>
+    </header>
+    <main class="dashboard-main">
+      <div id="projects-grid" class="projects-grid">
+        <!-- Card progetto iniettate da dashboard.js -->
+      </div>
+    </main>
+    <button id="btn-new-project" class="fab">+ Nuovo progetto</button>
+  </section>
+
+  <!-- ===== VIEW: EDITOR ===== -->
+  <section id="view-editor" class="view hidden">
+    <header class="app-header">
+      <button id="btn-editor-back" class="btn btn-ghost btn-sm">← Indietro</button>
+      <h1 class="header-title" id="editor-title">Nuovo progetto</h1>
+      <button id="btn-editor-save" class="btn btn-primary btn-sm">Pubblica</button>
+    </header>
+    <main class="editor-main">
+      <div id="editor-steps-nav" class="editor-steps-nav"></div>
+      <div id="editor-wizard" class="editor-wizard"></div>
+    </main>
+  </section>
+
+  <!-- ===== VIEW: PLAY ===== -->
+  <section id="view-play" class="view hidden">
+    <header class="app-header play-header">
+      <div class="project-header-info">
+        <span id="project-emoji-header" class="project-emoji-header"></span>
+        <h1 id="project-name-header" class="header-title"></h1>
+      </div>
+      <div class="header-actions">
+        <span id="admin-badge" class="badge badge-admin hidden">Admin</span>
+        <button id="btn-share-play"   class="btn btn-ghost btn-sm">🔗</button>
+        <button id="btn-show-log"     class="btn btn-ghost btn-sm">Storico</button>
+        <button id="btn-admin-manage" class="btn btn-ghost btn-sm hidden">Gestisci</button>
+      </div>
+    </header>
+    <main class="play-main">
+      <div id="event-banner-container"></div>
+      <div id="scoreboard-container"></div>
+      <div id="objective-container"></div>
+      <div id="deadline-tasks-container"></div>
+      <div id="recurring-tasks-container"></div>
+      <div id="activities-grid-container"></div>
+    </main>
+    <div id="log-history-panel" class="log-history-panel hidden">
+      <div class="log-panel-header">
+        <h2>Storico attività</h2>
+        <button id="btn-close-log" class="btn btn-ghost btn-sm">× Chiudi</button>
+      </div>
+      <div id="log-history-container"></div>
+    </div>
+    <button id="btn-log-activity" class="fab">+ Registra</button>
+  </section>
+
+  <!-- ===== MODAL OVERLAY (condiviso) ===== -->
+  <div id="modal-overlay" class="modal-overlay hidden" role="dialog" aria-modal="true">
+    <div id="modal-content" class="modal-content"></div>
+  </div>
+
+  <!-- ===== TOAST CONTAINER ===== -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.js"></script>
+  <script type="module" src="js/app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./assets/sw.js');
+    }
+  </script>
+</body>
+</html>

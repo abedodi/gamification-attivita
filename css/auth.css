@@ -1,0 +1,89 @@
+/* ========================================
+   LOGIN VIEW
+======================================== */
+#view-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-bg) 60%);
+  padding: var(--space-lg);
+}
+
+.login-container {
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl) var(--space-xl);
+  text-align: center;
+  box-shadow: var(--shadow-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.login-logo {
+  font-size: 3.5rem;
+  line-height: 1;
+  margin-bottom: var(--space-xs);
+}
+
+.login-card h1 {
+  font-size: var(--font-size-2xl);
+  font-weight: 800;
+  color: var(--color-text);
+}
+
+.login-subtitle {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-base);
+  margin-bottom: var(--space-sm);
+}
+
+.btn-google {
+  width: 100%;
+  justify-content: center;
+  padding: 14px var(--space-xl);
+  font-size: var(--font-size-base);
+  border-radius: var(--radius-md);
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+  box-shadow: var(--shadow-md);
+}
+
+.login-error {
+  color: var(--color-danger);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  min-height: 1.2em;
+}
+
+/* ========================================
+   LOADING OVERLAY
+======================================== */
+.auth-loading {
+  position: fixed;
+  inset: 0;
+  background: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  font-size: 2rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.spinner {
+  width: 36px; height: 36px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+}

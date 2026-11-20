@@ -1,0 +1,140 @@
+/* ========================================
+   LOG HISTORY PANEL
+======================================== */
+.log-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* ── Entry ── */
+.log-entry {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  transition: background .1s;
+}
+.log-entry:hover { background: var(--color-bg); }
+
+.log-entry-penalty {
+  background: var(--color-danger-light);
+  border-color: rgba(239,68,68,.2);
+}
+.log-entry-penalty:hover { background: #fde8e8; }
+
+.le-emoji {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  width: 32px;
+  text-align: center;
+}
+
+.le-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.le-name {
+  display: block;
+  font-weight: 700;
+  font-size: var(--font-size-sm);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.le-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  margin-top: 1px;
+}
+
+.le-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 6px;
+  border-radius: var(--radius-full);
+  font-size: 10px;
+  font-weight: 700;
+}
+.le-badge-penalty  { background: var(--color-danger-light);  color: #991B1B; }
+.le-badge-event    { background: var(--color-warning-light); color: #92400E; }
+.le-badge-recurring{ background: var(--color-primary-light); color: var(--color-primary-dark); }
+
+.le-pts {
+  font-weight: 800;
+  font-size: var(--font-size-base);
+  flex-shrink: 0;
+  min-width: 44px;
+  text-align: right;
+}
+
+/* ── Carica altri / Fine ── */
+.log-load-more {
+  padding: var(--space-md) 0;
+  text-align: center;
+}
+
+.log-end-label {
+  text-align: center;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  padding: var(--space-md) 0;
+}
+
+/* ── Empty state ── */
+.log-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-2xl);
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+.log-empty span { font-size: 2.5rem; }
+.log-empty p    { font-size: var(--font-size-sm); line-height: 1.6; }
+
+/* ========================================
+   SHARE MODAL
+======================================== */
+.share-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-md) 0;
+}
+
+.share-qr {
+  width: 200px;
+  height: 200px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+}
+
+.share-url {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  word-break: break-all;
+  text-align: center;
+  background: var(--color-bg);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  font-family: monospace;
+  max-width: 100%;
+}
+
+.share-hint {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  text-align: center;
+}
